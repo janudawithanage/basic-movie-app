@@ -31,7 +31,7 @@ function Home() {
                 <button type='submit' className='search-button'>Search</button>
             </form>
 
-            <div className="movie-grid">
+            <div className="movies-grid">
                     {movies.map((movie) => (
                         <Moviecard movie={movie} key={movie.id} />
                     
