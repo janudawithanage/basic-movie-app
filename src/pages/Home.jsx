@@ -25,15 +25,44 @@ function Home() {
         loadPopularMovies();
     }, []) ;
 
+
+    // Search as user types
+    useEffect(() => {
+        const fetchSearch = async () => {
+            if (!searchQuery.trim()) {
+                setLoading(true);
+                setError(null);
+                try {
+                    const popularMovies = await getPopularMovies();
+                    setMovies(popularMovies);
+                } catch (err) {
+                    setError("Failed to load movies...");
+                } finally {
+                    setLoading(false);
+                }
+                return;
+            }
+            setLoading(true);
+            setError(null);
+            try {
+                const results = await searchMovies(searchQuery);
+                setMovies(results);
+            } catch (err) {
+                setError("Failed to search movies...");
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchSearch();
+    }, [searchQuery]);
+
+    // Remove form submit handler (search is now live)
     const handleSearch = (e) => {
         e.preventDefault();
-        alert(searchQuery);
-        setSearchQuery("-");
     };
 
     return (
         <div className="home">
-
             <form onSubmit={handleSearch} className='search-form'>
                 <input
                     type="text"
@@ -42,13 +71,18 @@ function Home() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button type='submit' className='search-button'>Search</button>
             </form>
+
+            {loading && <div style={{ textAlign: 'center', margin: '2rem' }}>Loading...</div>}
+            {error && <div style={{ color: 'red', textAlign: 'center', margin: '2rem' }}>{error}</div>}
+
+            {!loading && !error && movies.length === 0 && (
+                <div style={{ textAlign: 'center', margin: '2rem', color: '#888' }}>No movies found.</div>
+            )}
 
             <div className="movies-grid">
                 {movies.map((movie) => (
                     <Moviecard movie={movie} key={movie.id} />
-
                 ))}
             </div>
         </div>
