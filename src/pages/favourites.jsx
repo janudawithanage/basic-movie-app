@@ -6,16 +6,23 @@ import MovieContext from '../contexts/moviecontext';
 function Favourites() {
   const { favourites } = useContext(MovieContext);
 
-  if (!favourites.length) {
-    return <div className="favorites-empty">
-      <h2>Your favourites list is empty</h2>
-      <p>Add some items to your favourites to see them here.</p>
-    </div>;
-  }
-
   return (
-    <div className="movies-grid">
-      {favourites.map(movie => <MovieCard movie={movie} key={movie.id} />)}
+    <div className="favorites">
+      <header className="favorites-header">
+        <h1>Your Favourites</h1>
+        <p className="favorites-subtitle">All your saved movies in one place.</p>
+      </header>
+
+      {!favourites.length ? (
+        <div className="favorites-empty">
+          <h2>Your favourites list is empty</h2>
+          <p>Add some items to your favourites to see them here.</p>
+        </div>
+      ) : (
+        <div className="movies-grid">
+          {favourites.map(movie => <MovieCard movie={movie} key={movie.id} />)}
+        </div>
+      )}
     </div>
   );
 }
