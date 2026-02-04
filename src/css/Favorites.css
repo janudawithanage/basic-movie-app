@@ -1,7 +1,28 @@
+
 .favorites {
-  padding: 2rem;
+  padding: 2rem 0;
   width: 100%;
   box-sizing: border-box;
+  background: #181818;
+  min-height: 100vh;
+}
+
+.favorites-header {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.favorites-header h1 {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.favorites-subtitle {
+  color: #aaa;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
 }
 
 .favorites h2 {
@@ -12,6 +33,7 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+
 .favorites-empty {
   text-align: center;
   padding: 4rem 2rem;
@@ -19,7 +41,9 @@
   border-radius: 12px;
   margin: 2rem auto;
   max-width: 600px;
+  color: #fff;
 }
+
 
 .favorites-empty h2 {
   margin-bottom: 1rem;
@@ -27,8 +51,9 @@
   color: #e50914;
 }
 
+
 .favorites-empty p {
-  color: #999;
+  color: #aaa;
   font-size: 1.2rem;
   line-height: 1.6;
 }
