@@ -1,15 +1,28 @@
 .navbar {
   background-color: #000000;
-  padding: 1rem 2rem;
+  padding: 1.5rem 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.navbar-brand a {
+  color: #e50914;
+  text-decoration: none;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
 .navbar-links {
@@ -17,24 +30,48 @@
   gap: 2rem;
 }
 
-.nav-link {
+.nav-links {
   font-size: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 4px;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
+  color: #fff;
+  text-decoration: none;
 }
 
-.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.nav-links:hover {
+  background-color: rgba(229, 9, 20, 0.2);
+  color: #e50914;
+}
+
+.navbar-profile {
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-profile:hover {
+  color: #e50914;
 }
 
 @media (max-width: 768px) {
   .navbar {
-    padding: 1rem;
+    padding: 1rem 1.5rem;
   }
 
   .navbar-brand {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+  }
+
+  .navbar-right {
+    gap: 1rem;
+  }
+
+  .navbar-profile svg {
+    width: 28px;
+    height: 28px;
   }
 
   .navbar-links {
