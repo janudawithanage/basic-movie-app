@@ -9,8 +9,8 @@ function Favourites() {
   return (
     <div className="favorites">
       <header className="favorites-header">
-        <h1>Your Favourites</h1>
-        <p className="favorites-subtitle">All your saved movies in one place.</p>
+        <h1>My Favourites</h1>
+        <p className="favorites-subtitle">Your saved collection. All your favourite movies in one place.</p>
       </header>
 
       {!favourites.length ? (
