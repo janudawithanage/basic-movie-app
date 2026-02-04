@@ -8,7 +8,7 @@ function Home() {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [filter, setFilter] = useState("latest"); // 'latest' or 'popular'
+    const [filter, setFilter] = useState("latest");
 
     useEffect(() => {
         const loadMovies = async () => {
@@ -23,7 +23,7 @@ function Home() {
                         if (!b.release_date) return -1;
                         return new Date(b.release_date) - new Date(a.release_date);
                     });
-                } // else keep as popular
+                }
                 setMovies(result);
             } catch (err) {
                 setError("Failed to load movies...");
@@ -36,8 +36,6 @@ function Home() {
         }
     }, [filter, searchQuery]);
 
-
-    // Search as user types
     useEffect(() => {
         const fetchSearch = async () => {
             if (!searchQuery.trim()) return;
@@ -55,13 +53,16 @@ function Home() {
         fetchSearch();
     }, [searchQuery]);
 
-    // Remove form submit handler (search is now live)
     const handleSearch = (e) => {
         e.preventDefault();
     };
 
     return (
         <div className="home">
+            <header className="home-header">
+                <h1>Discover Movies</h1>
+                <p className="home-subtitle">Find your next favourite movie. Search, filter, and explore!</p>
+            </header>
 
             <form onSubmit={handleSearch} className='search-form'>
                 <input
@@ -70,50 +71,34 @@ function Home() {
                     className='search-input'
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    aria-label="Search movies"
                 />
             </form>
 
-            {/* Filter Buttons */}
             {!searchQuery.trim() && (
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                <div className="filter-buttons">
                     <button
+                        className={filter === 'latest' ? 'active' : ''}
                         onClick={() => setFilter('latest')}
-                        style={{
-                            padding: '0.5rem 1.5rem',
-                            background: filter === 'latest' ? '#e50914' : '#222',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            fontWeight: 500,
-                            cursor: 'pointer',
-                            transition: 'background 0.2s',
-                        }}
+                        aria-pressed={filter === 'latest'}
                     >
                         Latest
                     </button>
                     <button
+                        className={filter === 'popular' ? 'active' : ''}
                         onClick={() => setFilter('popular')}
-                        style={{
-                            padding: '0.5rem 1.5rem',
-                            background: filter === 'popular' ? '#e50914' : '#222',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            fontWeight: 500,
-                            cursor: 'pointer',
-                            transition: 'background 0.2s',
-                        }}
+                        aria-pressed={filter === 'popular'}
                     >
                         Popular
                     </button>
                 </div>
             )}
 
-            {loading && <div style={{ textAlign: 'center', margin: '2rem' }}>Loading...</div>}
-            {error && <div style={{ color: 'red', textAlign: 'center', margin: '2rem' }}>{error}</div>}
+            {loading && <div className="loading">Loading...</div>}
+            {error && <div className="error">{error}</div>}
 
             {!loading && !error && movies.length === 0 && (
-                <div style={{ textAlign: 'center', margin: '2rem', color: '#888' }}>No movies found.</div>
+                <div className="no-movies">No movies found.</div>
             )}
 
             <div className="movies-grid">
